@@ -2,14 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>GuitarApi</title>
+    {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> --}}
+    <link href="/css/app.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="app">
-      <h1>Hi</h1>
-      <h1>@{{msg}}</h1>
-      <example-component :title="title" :data="dadosDaTabela"/>
+      <figure class="img-logo text-center">
+        <img src="/img/telecaster.png" alt="">
+      </figure>
+      <h3 class="text-center">GuitarApi</h3>
+      <guitar-list-component :title="tableTitle" :data="tableData"/>
+    </div>
     </div>
   </body>
-  <script type="text/javascript" src={{asset('js/app.js')}}></script>
+  <script type="text/javascript" src=/js/app.js></script>
 </html>

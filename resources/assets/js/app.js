@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-var axios = require('axios')
 window.Vue = require('vue');
 
 /**
@@ -15,26 +14,25 @@ window.Vue = require('vue');
  */
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
-import ExampleComponent from './components/ExampleComponent.vue';
+import GuitarListComponent from './components/GuitarListComponent.vue';
 
 const app = new Vue({
   components: {
-    ExampleComponent
+    GuitarListComponent
   },
   el: '#app',
   data() {
     return {
-      msg: "Booora Vue.js",
-      title: "Titulo que vai pro Component",
-      url: 'https://swapi.co/api/',
-      dadosDaTabela: []
+      apiUrl: 'http://localhost:8000/api/guitars/',
+      tableTitle: '',
+      tableData: []
     }
   },
   methods: {
-    getStartWars(param) {
-      axios.get(this.url + param).then(response => {
-        this.dadosDaTabela = response.data.results
-        console.log(this.dadosDaTabela)
+    getGuitars() {
+      axios.get(this.apiUrl).then(response => {
+        this.tableTitle = "Guitar List"
+        this.tableData = response.data
       }).catch(error => {
         console.log(error)
         alert('deu erro')
@@ -42,6 +40,6 @@ const app = new Vue({
     }
   },
   mounted() {
-    this.getStartWars('people')
+    this.getGuitars()
   }
 });

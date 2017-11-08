@@ -973,8 +973,8 @@ module.exports = __webpack_require__(42);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ExampleComponent_vue__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ExampleComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_ExampleComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_GuitarListComponent_vue__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_GuitarListComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_GuitarListComponent_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -982,7 +982,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  */
 
 __webpack_require__(11);
-var axios = __webpack_require__(16);
 window.Vue = __webpack_require__(35);
 
 /**
@@ -996,25 +995,24 @@ window.Vue = __webpack_require__(35);
 
 var app = new Vue({
   components: {
-    ExampleComponent: __WEBPACK_IMPORTED_MODULE_0__components_ExampleComponent_vue___default.a
+    GuitarListComponent: __WEBPACK_IMPORTED_MODULE_0__components_GuitarListComponent_vue___default.a
   },
   el: '#app',
   data: function data() {
     return {
-      msg: "Booora Vue.js",
-      title: "Titulo que vai pro Component",
-      url: 'https://swapi.co/api/',
-      dadosDaTabela: []
+      apiUrl: 'http://localhost:8000/api/guitars/',
+      tableTitle: '',
+      tableData: []
     };
   },
 
   methods: {
-    getStartWars: function getStartWars(param) {
+    getGuitars: function getGuitars() {
       var _this = this;
 
-      axios.get(this.url + param).then(function (response) {
-        _this.dadosDaTabela = response.data.results;
-        console.log(_this.dadosDaTabela);
+      axios.get(this.apiUrl).then(function (response) {
+        _this.tableTitle = "Guitar List";
+        _this.tableData = response.data;
       }).catch(function (error) {
         console.log(error);
         alert('deu erro');
@@ -1022,7 +1020,7 @@ var app = new Vue({
     }
   },
   mounted: function mounted() {
-    this.getStartWars('people');
+    this.getGuitars();
   }
 });
 
@@ -42638,7 +42636,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\GuitarListComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -42648,9 +42646,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0ca92eac", Component.options)
+    hotAPI.createRecord("data-v-3cf0786e", Component.options)
   } else {
-    hotAPI.reload("data-v-0ca92eac", Component.options)
+    hotAPI.reload("data-v-3cf0786e", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -42798,15 +42796,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['title', 'data'],
   mounted: function mounted() {
-    console.log('Component mounted.');
+    alert('Component mounted.');
   }
 });
 
@@ -42820,28 +42814,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _vm._v(_vm._s(_vm.title))
-          ]),
+      _c("div", { staticClass: "col-md-10 col-md-offset-1" }, [
+        _c("table", { staticClass: "table table-bordered" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("table", [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.data, function(d) {
-                  return _c("tr", [
-                    _c("td", [_vm._v(_vm._s(d.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(d.gender))])
-                  ])
-                })
-              )
-            ])
-          ])
+          _c(
+            "tbody",
+            _vm._l(_vm.data, function(d) {
+              return _c("tr", [
+                _c("td", [_vm._v(_vm._s(d.model))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(d.company))]),
+                _vm._v(" "),
+                _vm._m(1, true)
+              ])
+            })
+          )
         ])
       ])
     ])
@@ -42853,10 +42841,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Model")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Gender")])
+      _c("th", [_vm._v("Brand")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("i", { staticClass: "fa fa-eye" })])
   }
 ]
 render._withStripped = true
@@ -42864,7 +42858,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3cf0786e", module.exports)
   }
 }
 

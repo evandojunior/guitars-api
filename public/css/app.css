@@ -1,5 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+.img-logo {
+  width: "100%";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 20px 0;
+}
+
+.img-logo img {
+  margin-left: 55px;
+  height: 150px;
+  /* IE 9 */
+  -webkit-transform: rotate(35deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(35deg);
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
